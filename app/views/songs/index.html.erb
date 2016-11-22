@@ -2,9 +2,14 @@
 
 <h1>Listing Songs</h1>
 
-<table>
+<div>
+
+  
+
+<table class="table">
   <thead>
     <tr>
+   
       <th>Name</th>
       <th>Duration</th>
       <th>Genre</th>
@@ -15,17 +20,34 @@
   <tbody>
     <% @songs.each do |song| %>
       <tr>
+        
         <td><%= song.name %></td>
         <td><%= song.duration %></td>
-        <td><%= song.genre %></td>
+        <td><%= song.genre.name %></td>
+        <% if user_signed_in? %>
         <td><%= link_to 'Show', song %></td>
         <td><%= link_to 'Edit', edit_song_path(song) %></td>
         <td><%= link_to 'Destroy', song, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% else %>
+        <p>INICIA SESION PARA MODIFICAR CANCIÓN</p>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
-
+     
+<% if user_signed_in? %>
 <br>
 
 <%= link_to 'New Song', new_song_path %>
+       
+
+<% else %>
+
+<p>INICIA SESION PARA AGREGAR CANCIÓN</p>
+
+<% end %>
+</div>
+
+
+
